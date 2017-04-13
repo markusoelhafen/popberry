@@ -14,22 +14,22 @@ IP = parser.get('config', 'ip')
 USER = parser.get('config', 'user')
 TEMPSENSOR = parser.get('config', 'temp_sensor')
 
-#generate api urls
-geturl = "http://" + IP  + "/api/" + USER  + "/sensors/" + TEMPSENSOR
+# generate api urls
+geturl = "http://" + IP + "/api/" + USER + "/sensors/" + TEMPSENSOR
 
 
-#define json requests
-config_on = {"on":True}
+# define json requests
+config_on = {"on": True}
 
-#get request from api
+# get request from api
 g = requests.get(geturl)
 
-#print g
-#print g.json()['state']['on']
+# print g
+# print g.json()['state']['on']
 
-if g.json()['config']['on']: #if light is already on -> turn off
+if g.json()['config']['on']:  # if light is already on -> turn off
     print g.json()['state']['temperature']
-else: #else light is off -> turn on
+else:  # else light is off -> turn on
     r = requests.put(puturl, json.dumps(data_on), timeout=5)
 
 # i am the test comment
