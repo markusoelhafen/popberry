@@ -39,3 +39,4 @@ Thumbs.db
 # project relevant files #
 ##########################
 huetest/config.ini
+firebase/firebase_config.ini
