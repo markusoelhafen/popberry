@@ -51,7 +51,9 @@ db = firebase.database()
 geturl = "http://" + IP + "/api/" + HUE_USER + "/sensors/" + TEMPSENSOR
 g = requests.get(geturl)
 
-if g.json()['config']['off']:  # temperature sensor needs to be turned on
+print(g.json()['config'])
+
+if g.json()['config']['on'] == False:  # temperature sensor needs to be turned on
     r = requests.put(puturl, json.dumps({"on": True}), timeout=5)
 
 #get room temperature and put decimal in right place
