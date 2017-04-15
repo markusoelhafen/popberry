@@ -1,7 +1,7 @@
 import requests
 import json
 
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 ####################
 # READ CONFIG FILE #
@@ -19,7 +19,7 @@ geturl = "http://" + IP + "/api/" + USER + "/sensors/" + TEMPSENSOR
 
 
 # define json requests
-config_on = {"on": True}
+#config_on = {"on": True}
 
 # get request from api
 g = requests.get(geturl)
@@ -28,8 +28,8 @@ g = requests.get(geturl)
 # print g.json()['state']['on']
 
 if g.json()['config']['on']:  # if light is already on -> turn off
-    print g.json()['state']['temperature']
+    print (g.json()['state']['temperature'])
 else:  # else light is off -> turn on
-    r = requests.put(puturl, json.dumps(data_on), timeout=5)
+    r = requests.put(puturl, json.dumps({"on": True}), timeout=5)
 
 # i am the test comment
