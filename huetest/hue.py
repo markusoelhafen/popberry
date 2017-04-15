@@ -8,14 +8,14 @@ from ConfigParser import SafeConfigParser
 ####################
 
 parser = SafeConfigParser()
-parser.read('config.ini')
+parser.read('./config.ini')
 
-IP = parser.get('config', 'ip')
-USER = parser.get('config', 'user')
-LIGHT = parser.get('config', 'light')
-SATURATION = parser.get('config', 'lamp_sat')
-BRIGHTNESS = parser.get('config', 'lamp_bri')
-HUE = parser.get('config', 'lamp_hue')
+IP = parser.get('hue', 'ip')
+USER = parser.get('hue', 'user')
+LIGHT = parser.get('hue', 'light')
+SATURATION = parser.get('hue', 'lamp_sat')
+BRIGHTNESS = parser.get('hue', 'lamp_bri')
+HUE = parser.get('hue', 'lamp_hue')
 
 
 # generate api urls

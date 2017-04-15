@@ -8,15 +8,15 @@ from configparser import SafeConfigParser
 ####################
 
 parser = SafeConfigParser()
-parser.read('firebase_config.ini')
+parser.read('./config.ini')
 
-APIKEY = parser.get('config', 'APIKEY')
-AUTHDOMAIN = parser.get('config', 'AUTHDOMAIN')
-DATABASEURL = parser.get('config', 'DATABASEURL')
-STORAGEBUCKET = parser.get('config', 'STORAGEBUCKET')
-SERVICEACCOUNT = parser.get('config', 'SERVICEACCOUNT')
-USER = parser.get('config', 'USER')
-PWD = parser.get('config', 'PWD')
+APIKEY = parser.get('firebase', 'apikey')
+AUTHDOMAIN = parser.get('firebase', 'authdomain')
+DATABASEURL = parser.get('firebase', 'databaseurl')
+STORAGEBUCKET = parser.get('firebase', 'storagebucket')
+SERVICEACCOUNT = parser.get('firebase', 'serviceAccount')
+USER = parser.get('firebase', 'user')
+PWD = parser.get('firebase', 'pwd')
 
 config = {
   "apiKey": APIKEY,
