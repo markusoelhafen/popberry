@@ -1,13 +1,17 @@
 import requests
 import json
+from configparser import SafeConfigParser
 
-OPENWEATHER_URL = 'api.openweathermap.org'
-API_KEY = '01d07b295723d5f9ebf168c3ccd2bf04'
-REQ_BASE = r"/data/2.5/weather?"
-CITY_ID = '2911298'
+parser = SafeConfigParser()
+parser.read('./config.ini')
+
+API_KEY = parser.get('weather', 'openweather_apikey')
+CITY = parser.get('weather', 'openweather_city_id')
+UNITS = "&units" + parser.get('weather', 'openweather_units')
+BASEURL = "http://api.openweathermap.org/data/2.5/weather?id="
 
 def currentWeather():
-    requestUrl = 'http://' + OPENWEATHER_URL + REQ_BASE + 'id=' + CITY_ID + '&units=metric' + '&appid=' + API_KEY
+    requestUrl = BASEURL + CITY + "&appid=" + API_KEY + UNITS
     weatherRequest = requests.get(requestUrl)
     weatherResult = weatherRequest.json()
 
