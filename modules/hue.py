@@ -24,3 +24,29 @@ def getTemperatureSensors(sensors):
     for sensor, val in sensors.items():
         if val['type'] == 'ZLLTemperature':
             return {sensor: val}
+
+def turnOnLight(LIGHT):
+    url = BASEURL + "/lights/" + LIGHT + "/state"
+    requests.put(url, json.dumps({"on": True}), timeout=5)
+
+def turnOffLight(LIGHT):
+    url = BASEURL + "/lights/" + LIGHT + "/state"
+    requests.put(url, json.dumps({"on": False}), timeout=5)
+
+def dimLight(LIGHT, VALUE=None):
+    url = BASEURL + "/lights/" + LIGHT
+    puturl = url + "/state"
+    g = requests.get(url)
+
+    if VALUE:
+        targetBrightness = int(254/100*VALUE)
+    else:
+        currentBrightness = g.json()['state']['bri']
+        targetBrightness = currentBrightness - (int(254/10))
+
+    if targetBrightness <= 0:
+        turnOffLight(LIGHT)
+        print("turning off light")
+    else:
+
+        requests.put(puturl, json.dumps({"on": True,"bri": targetBrightness}), timeout=5)
