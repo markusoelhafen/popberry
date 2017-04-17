@@ -19,4 +19,4 @@ for sensor, val in temp.items():
     firebase.pushToDatabase(room_temp, ['room_temp', room_name])
 
 # turn on light
-hue.turnOffLight('2')
+hue.dimLight('2', 50)
