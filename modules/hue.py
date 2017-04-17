@@ -24,3 +24,13 @@ def getTemperatureSensors(sensors):
     for sensor, val in sensors.items():
         if val['type'] == 'ZLLTemperature':
             return {sensor: val}
+
+def turnOnLight(LIGHT):
+    url = BASEURL + "/lights/" + LIGHT + "/state"
+    print(url)
+    requests.put(url, json.dumps({"on": True}), timeout=5)
+
+def turnOffLight(LIGHT):
+    url = BASEURL + "/lights/" + LIGHT + "/state"
+    print(url)
+    requests.put(url, json.dumps({"on": False}), timeout=5)

@@ -7,7 +7,7 @@ print(weather)
 
 lights = hue.getLights()
 for light, val in lights.items():
-    print(val['name'])
+    print(light,':',val['name'])
 
 temp = hue.getTemperatureSensors(hue.getSensors())
 for sensor, val in temp.items():
@@ -17,3 +17,6 @@ for sensor, val in temp.items():
 
     #push to database
     firebase.pushToDatabase(room_temp, ['room_temp', room_name])
+
+# turn on light
+hue.turnOffLight('2')
