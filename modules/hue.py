@@ -19,3 +19,8 @@ def getLights():
     geturl = BASEURL + "/lights/"
     g = requests.get(geturl)
     return g.json()
+
+def getTemperatureSensors(sensors):
+    for sensor, val in sensors.items():
+        if val['type'] == 'ZLLTemperature':
+            return {sensor: val}

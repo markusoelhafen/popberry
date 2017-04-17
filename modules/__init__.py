@@ -1,1 +1,1 @@
-__all__ = ['weather', 'hue']
+__all__ = ['weather', 'hue', 'firebase']
