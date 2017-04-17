@@ -44,3 +44,5 @@ __pycache__
 # project relevant files #
 ##########################
 config.ini
+quickstart.py
+assets/
