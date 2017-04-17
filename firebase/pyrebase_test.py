@@ -61,7 +61,7 @@ g = requests.get(geturl)
 
 tempSensors = getTempSensor(g.json())
 
-def displayTemp(sensors):
+def pushTempToDatabase(sensors):
     for sensor, val in sensors.items():
         if val['config']['on'] == False:
             print('its off!')
@@ -69,9 +69,7 @@ def displayTemp(sensors):
         room_name = val['name']
         room_temp = val['state']['temperature'] / 100
         print(room_name,': ',room_temp)
+        #push temperature to firebase database
+        db.child("room_temp").child(room_name).set(room_temp, user['idToken'])
 
-displayTemp(tempSensors)
-'''
-#push temperature to firebase database
-db.child("room_temp").child("hallway").set(room_temp, user['idToken'])
-'''
+pushTempToDatabase(tempSensors)
