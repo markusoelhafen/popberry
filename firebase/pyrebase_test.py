@@ -68,7 +68,7 @@ def displayTemp(sensors):
 
         room_name = val['name']
         room_temp = val['state']['temperature'] / 100
-        print(room_name, ': ', room_temp)
+        print(room_name,': ',room_temp)
 
 displayTemp(tempSensors)
 '''
