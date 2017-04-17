@@ -46,17 +46,32 @@ user = auth.sign_in_with_email_and_password(FB_USER, FB_PWD)
 # get reference to database
 db = firebase.database()
 
+def getTempSensor(sensors):
+    for sensor, val in sensors.items():
+        #print(val['type'])
+        if val['type'] == 'ZLLTemperature':
+            # print(sensor)
+            # print(val)
+            return {sensor: val}
+
 # HUE
 # create get request to receive data from specific sensor
-geturl = "http://" + IP + "/api/" + HUE_USER + "/sensors/" + TEMPSENSOR
+geturl = "http://" + IP + "/api/" + HUE_USER + "/sensors/" #+ TEMPSENSOR
 g = requests.get(geturl)
 
-print(g.json()['config'])
+tempSensors = getTempSensor(g.json())
 
-if g.json()['config']['on'] == False:  # temperature sensor needs to be turned on
-    r = requests.put(puturl, json.dumps({"on": True}), timeout=5)
+def displayTemp(sensors):
+    for sensor, val in sensors.items():
+        if val['config']['on'] == False:
+            print('its off!')
 
-#get room temperature and put decimal in right place
-room_temp = g.json()['state']['temperature'] / 100
+        room_name = val['name']
+        room_temp = val['state']['temperature'] / 100
+        print(room_name, ': ', room_temp)
+
+displayTemp(tempSensors)
+'''
 #push temperature to firebase database
 db.child("room_temp").child("hallway").set(room_temp, user['idToken'])
+'''
