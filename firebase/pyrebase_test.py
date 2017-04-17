@@ -6,6 +6,11 @@ import pyrebase
 from configparser import SafeConfigParser
 
 
+OPENWEATHER_URL = 'api.openweathermap.org'
+API_KEY = '01d07b295723d5f9ebf168c3ccd2bf04'
+REQ_BASE = r"/data/2.5/weather?"
+CITY_ID = '2911298'
+
 ####################
 # READ CONFIG FILE #
 ####################
@@ -73,3 +78,14 @@ def pushTempToDatabase(sensors):
         db.child("room_temp").child(room_name).set(room_temp, user['idToken'])
 
 pushTempToDatabase(tempSensors)
+
+### WEATHER ACTION
+
+reqUrl = 'http://' + OPENWEATHER_URL + REQ_BASE + 'id=' + CITY_ID + '&units=metric' + '&appid=' + API_KEY
+weatherRequest = requests.get(reqUrl)
+weatherResult = weatherRequest.json()
+
+db.child("currentweather").child("city").set(weatherResult['name'], user['idToken'])
+db.child("currentweather").child("temperature").set(weatherResult['main']['temp'], user['idToken'])
+db.child("currentweather").child("weather").set(weatherResult['weather'][0]['main'], user['idToken'])
+db.child("currentweather").child("description").set(weatherResult['weather'][0]['description'], user['idToken'])
