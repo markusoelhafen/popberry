@@ -1,7 +1,6 @@
 #!/usr/local/bin/python3
 
 from modules import *
-from configparser import SafeConfigParser
 
 weather = weather.currentWeather()
 print(weather)
