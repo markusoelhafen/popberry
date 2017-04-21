@@ -7,7 +7,7 @@ parser.read('./config.ini')
 
 API_KEY = parser.get('weather', 'openweather_apikey')
 CITY = parser.get('weather', 'openweather_city_id')
-UNITS = "&units" + parser.get('weather', 'openweather_units')
+UNITS = "&units=" + parser.get('weather', 'openweather_units')
 BASEURL = "http://api.openweathermap.org/data/2.5/weather?id="
 
 def currentWeather():
