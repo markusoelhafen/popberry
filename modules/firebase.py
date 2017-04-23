@@ -29,6 +29,9 @@ user = auth.sign_in_with_email_and_password(FB_USER, FB_PWD)
 # initialize database
 db = firebase.database()
 
+def updateDatabase(data):
+    db.set(data, user['idToken'])
+
 def pushToDatabase(data, children):
     path = ''
     for child in children:
