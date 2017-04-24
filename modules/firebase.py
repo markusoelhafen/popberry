@@ -29,6 +29,10 @@ user = auth.sign_in_with_email_and_password(FB_USER, FB_PWD)
 # initialize database
 db = firebase.database()
 
+def main():
+    print("firebase running...")
+    my_stream = db.stream(stream_handler)
+
 def updateDatabase(data):
     db.set(data, user['idToken'])
 
@@ -37,3 +41,13 @@ def pushToDatabase(data, children):
     for child in children:
         path += "/{}".format(child.strip("/"))
     db.child(path).set(data, user['idToken'])
+
+def stream_handler(message):
+    # print(message["event"]) # put
+    print(message["path"]) # /-K7yGTTEp7O549EzTYtI
+    print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
+
+# my_stream = db.child("posts").stream(stream_handler)
+
+if __name__ == "__main__":
+    main()
