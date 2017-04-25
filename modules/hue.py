@@ -10,6 +10,10 @@ USER = parser.get('hue', 'hue_user')
 TEMPSENSOR = parser.get('hue', 'temp_sensor')
 BASEURL = "http://" + IP + "/api/" + USER
 
+def main():
+    print("running main...")
+    getRooms()
+
 def getSensors():
     geturl = BASEURL + "/sensors/"
     g = requests.get(geturl)
@@ -19,6 +23,19 @@ def getLights():
     geturl = BASEURL + "/lights/"
     g = requests.get(geturl)
     return g.json()
+
+def getRooms():
+    geturl = BASEURL + "/groups/"
+    g = requests.get(geturl)
+    groups = g.json()
+
+    allRooms = {}
+
+    for key, val in groups.items():
+        if val['type'] == 'Room':
+            allRooms.update({key: val})
+
+    return allRooms
 
 def getTemperatureSensors(sensors):
     for sensor, val in sensors.items():
@@ -50,3 +67,7 @@ def dimLight(LIGHT, VALUE=None):
     else:
 
         requests.put(puturl, json.dumps({"on": True,"bri": targetBrightness}), timeout=5)
+
+
+if __name__ == "__main__":
+    main()
