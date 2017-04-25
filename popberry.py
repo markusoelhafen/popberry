@@ -16,17 +16,29 @@ def hueTemperature():
 
     return tempSensors
 
+def hueLights():
+    rooms = hue.getRooms()
+    for key, val in rooms.items():
+        roomlights = {}
+
+        for light in val['lights']:
+            lightdetail = hue.getLightDetails(light)
+            roomlights.update({light: lightdetail})
+
+        # print(rooms[key]['lights'])
+        rooms[key]['lights'] = roomlights
+
+    return rooms
+
 def updateInformation():
     print('updating information...')
     data['currentweather'] = weather.currentWeather()
     data['room_temp'] = hueTemperature()
+    data['rooms'] = hueLights()
     firebase.updateDatabase(data)
 
 def main():
-    # updateInformation()
-    rooms = hue.getRooms()
-    for key, val in rooms.items():
-        print(val['name'])
+    updateInformation()
 
 if __name__ == '__main__':
     main()

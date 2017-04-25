@@ -18,6 +18,11 @@ def getSensors():
     g = requests.get(geturl)
     return g.json()
 
+def getLightDetails(LIGHT):
+    geturl = BASEURL + "/lights/" + LIGHT
+    g = requests.get(geturl)
+    return g.json()
+
 def getLights():
     geturl = BASEURL + "/lights/"
     g = requests.get(geturl)
@@ -35,6 +40,10 @@ def getRooms():
             allRooms.update({key: val})
 
     return allRooms
+
+# def matchLightsToRooms(allRooms):
+#     for key, val in allRooms.items():
+
 
 def getTemperatureSensors(sensors):
     for sensor, val in sensors.items():
