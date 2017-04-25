@@ -25,7 +25,7 @@ def updateInformation():
 def main():
     # updateInformation()
     rooms = hue.getRooms()
-    for key, val in rooms:
+    for key, val in rooms.items():
         print(val['name'])
 
 if __name__ == '__main__':
