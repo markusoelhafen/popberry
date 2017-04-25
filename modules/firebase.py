@@ -47,6 +47,10 @@ def stream_handler(message):
     print(message["path"]) # /-K7yGTTEp7O549EzTYtI
     print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
 
+    if message["path"] == "/stream/foo":
+        if message["data"] == "quit":
+            return this.close()
+
 # my_stream = db.child("posts").stream(stream_handler)
 
 if __name__ == "__main__":
