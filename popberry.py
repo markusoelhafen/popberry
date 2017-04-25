@@ -17,13 +17,16 @@ def hueTemperature():
     return tempSensors
 
 def updateInformation():
-    print 'updating information...'
+    print('updating information...')
     data['currentweather'] = weather.currentWeather()
     data['room_temp'] = hueTemperature()
     firebase.updateDatabase(data)
 
 def main():
-    updateInformation()
+    # updateInformation()
+    rooms = hue.getRooms()
+    for key, val in rooms:
+        print(val['name'])
 
 if __name__ == '__main__':
     main()

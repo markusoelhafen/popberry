@@ -12,7 +12,6 @@ BASEURL = "http://" + IP + "/api/" + USER
 
 def main():
     print("running main...")
-    getRooms()
 
 def getSensors():
     geturl = BASEURL + "/sensors/"
